@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <string.h>
+
+struct lista{                                           //Definição das structs
+  int calorias, carboidratos;
+  char nome[50];
+};
+
+int main (){
+
+  int n, aux1, i, j;
+  char aux2[50];
+  struct lista produto[100];
+
+  printf("digite o numero de produtos:\n");             //Número de produtos
+
+  scanf("%d", &n);
+
+  for(i=0; i<n; i++){                               // Recolhimento de dados
+
+    printf("Qual o produto?\n");
+
+    fflush(stdin);
+
+    fgets(produto[i].nome,50,stdin);
+
+    printf("Qual a quantidade de calorias?\n");
+
+    scanf("%d", &produto[i].calorias);
+
+    printf("Qual a quantidade de carboidratos?\n");
+
+    scanf("%d", &produto[i].carboidratos);
+  }
+
+  for(i=0; i<n; i++){                         //Ordenação dos valores calóricos.
+    for(j=i; j<n; j++){
+        if(produto[i].calorias>produto[j].calorias){
+          aux1 = produto[i].calorias;
+          produto[i].calorias = produto[j].calorias;
+          produto[j].calorias = aux1;
+          strcpy (aux2, produto[i].nome);
+          strcpy (produto[i].nome, produto[j].nome);
+          strcpy (produto[j].nome, aux2);
+         }
+                                    //Caso de igualdade das calorias.
+                                   //Ordenação dos valores de carboidratos.
+
+         if(produto[i].calorias == produto[j].calorias){
+
+           if(produto[i].carboidratos>produto[j].carboidratos){
+              aux1 = produto[i].calorias;
+              produto[i].calorias = produto[j].calorias;
+              produto[j].calorias = aux1;
+              strcpy (aux2, produto[i].nome);
+              strcpy (produto[i].nome, produto[j].nome);
+              strcpy (produto[j].nome, aux2);
+           }
+         }
+      }
+   }
+
+   for(i=0; i<n; i++){
+
+     printf("%s", produto[i].nome);
+   }
+}
